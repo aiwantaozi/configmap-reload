@@ -1,2 +1,7 @@
 out/
 _gopath/
+/.dapper
+/bin
+/dist
+/build
+*.swp
