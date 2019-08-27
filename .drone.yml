@@ -74,6 +74,15 @@ steps:
     - pull_request
     - tag
 
+- name: stage-binaries
+  image: maiwj/dapper:windows-1903
+  commands:
+    - "cp -r ./bin/* ./package/windows/"
+  when:
+    event:
+      - push
+      - tag
+
 - name: docker-publish
   image: plugins/docker
   settings:
@@ -149,6 +158,15 @@ steps:
     - push
     - pull_request
     - tag
+
+- name: stage-binaries
+  image: maiwj/dapper:windows-1809
+  commands:
+    - "cp -r ./bin/* ./package/windows/"
+  when:
+    event:
+      - push
+      - tag
 
 - name: docker-publish
   image: plugins/docker
