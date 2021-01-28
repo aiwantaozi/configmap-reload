@@ -90,7 +90,7 @@ steps:
         - tag
 
   - name: docker-publish
-    image: plugins/docker
+    image: luthermonson/drone-docker:20H2
     settings:
       build_args:
         - SERVERCORE_VERSION=20H2
@@ -114,22 +114,6 @@ steps:
       ref:
         - refs/heads/rancher
         - refs/tags/*
-
-  - name: slack_notify
-    image: plugins/slack
-    settings:
-      template: "Build {{build.link}} failed to publish an image/artifact.\n"
-      username: Drone_Publish
-      webhook:
-        from_secret: slack_webhook
-    when:
-      event:
-        exclude:
-          - pull_request
-      instance:
-        - drone-publish.rancher.io
-      status:
-        - failure
 
 volumes:
   - name: docker_pipe
@@ -182,7 +166,7 @@ steps:
         - tag
 
   - name: docker-publish
-    image: plugins/docker
+    image: luthermonson/drone-docker:2004
     settings:
       build_args:
         - SERVERCORE_VERSION=2004
@@ -206,22 +190,6 @@ steps:
       ref:
         - refs/heads/rancher
         - refs/tags/*
-
-  - name: slack_notify
-    image: plugins/slack
-    settings:
-      template: "Build {{build.link}} failed to publish an image/artifact.\n"
-      username: Drone_Publish
-      webhook:
-        from_secret: slack_webhook
-    when:
-      event:
-        exclude:
-          - pull_request
-      instance:
-        - drone-publish.rancher.io
-      status:
-        - failure
 
 volumes:
   - name: docker_pipe
